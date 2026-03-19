@@ -236,6 +236,7 @@ import {
   SIZE_LIMIT,
 } from "/assets/main.mjs";
 import Dialog from "./Dialog.vue";
+import LoginDialog from "./LoginDialog.vue";
 import Menu from "./Menu.vue";
 import MimeIcon from "./MimeIcon.vue";
 import UploadPopup from "./UploadPopup.vue";
@@ -693,10 +694,10 @@ export default {
 
   components: {
     Dialog,
+    LoginDialog,
     Menu,
     MimeIcon,
     UploadPopup,
-    LoginDialog: () => import("./LoginDialog.vue"),
   },
 };
 </script>
