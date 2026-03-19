@@ -12,19 +12,12 @@ command = "node scripts/predeploy.mjs"
 [assets]
 directory = ".cf-assets"
 binding = "ASSETS"
-include = ["*.html", "*.txt", "assets/**"]
-exclude = ["node_modules/**", ".git/**"]
 
 # R2 存储桶绑定
 [[r2_buckets]]
 binding = "BUCKET"
 bucket_name = "r2cloud"
 preview_bucket_name = "r2cloud"
-
-# KV 命名空间绑定（缓存）
-# 注：id 和 preview_id 由 predeploy.mjs 自动创建和管理
-[[kv_namespaces]]
-binding = "CACHE"
 
 [vars]
 GUEST = "public/"

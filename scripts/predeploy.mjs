@@ -42,16 +42,6 @@ async function ensureBucket(bucketName) {
   }
 }
 
-async function ensureKV() {
-  try {
-    console.log("[predeploy] Setting up KV namespaces...");
-    await runWithOutput("node", [path.join(path.dirname(fileURLToPath(import.meta.url)), "setupKV.mjs")]);
-  } catch (error) {
-    console.error(`[predeploy] KV setup failed: ${error.message}`);
-    throw error;
-  }
-}
-
 async function exists(targetPath) {
   try {
     await access(targetPath);
@@ -90,9 +80,6 @@ async function main() {
   const bucketName = "r2cloud";
   console.log(`[predeploy] ensure R2 bucket: ${bucketName}`);
   await ensureBucket(bucketName);
-  
-  console.log(`[predeploy] ensure KV namespaces...`);
-  await ensureKV();
   
   console.log(`[predeploy] prepare assets...`);
   await prepareAssets();
