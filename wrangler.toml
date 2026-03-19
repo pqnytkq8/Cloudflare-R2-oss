@@ -1,5 +1,5 @@
 # Cloudflare Workers 配置
-# 直接从 GitHub 部署到 Workers
+# 同时支持 Workers 和 Pages 部署
 
 name = "flaredrive"
 main = "functions/_middleware.ts"
@@ -10,14 +10,14 @@ compatibility_flags = ["nodejs_compat"]
 [[r2_buckets]]
 binding = "BUCKET"
 bucket_name = "production-bucket"
-# 本地开发用预览桶
 preview_bucket_name = "local-bucket"
 
-# 开发服务器配置
+# 开发服务器
 [dev]
 ip = "127.0.0.1"
 port = 8787
 local_protocol = "http"
+
 
 
 
