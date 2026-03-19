@@ -24,26 +24,29 @@
       <input type="search" v-model="search" aria-label="Search" />
       <div class="menu-button">
         <button 
-          class="circle" 
+          v-if="!isLoggedIn"
+          class="circle login-button" 
           @click="showLoginDialog = true"
-          title="登录"
-          style="margin-right: 4px;"
+          title="点击登录以访问更多资源"
+          style="background-color: #2196F3; color: white; margin-right: 4px;"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="display: block; margin: 4px">
             <path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
           </svg>
         </button>
-        <button 
-          v-if="isLoggedIn"
-          class="circle"
-          @click="logout"
-          title="退出登录"
-          style="margin-right: 4px;"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="display: block; margin: 4px">
-            <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
-          </svg>
-        </button>
+        <div v-else style="display: flex; align-items: center; margin-right: 8px; gap: 4px;">
+          <span style="font-size: 12px; color: #666;">{{ username }}</span>
+          <button 
+            class="circle"
+            @click="logout"
+            title="退出登录"
+            style="margin-right: 4px;"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="display: block; margin: 4px">
+              <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+            </svg>
+          </button>
+        </div>
         <button class="circle" @click="showMenu = true">
           <svg
             xmlns="http://www.w3.org/2000/svg"
