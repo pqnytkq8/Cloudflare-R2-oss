@@ -1,4 +1,4 @@
-# Cloudflare Workers 配置
+﻿# Cloudflare Workers 配置
 # 同时支持 Workers 和 Pages 部署
 
 name = "r2cloud"
@@ -12,6 +12,8 @@ command = "node scripts/predeploy.mjs"
 [assets]
 directory = ".cf-assets"
 binding = "ASSETS"
+include = ["*.html", "*.txt", "assets/**"]
+exclude = ["node_modules/**", ".git/**"]
 
 # R2 存储桶绑定
 [[r2_buckets]]
@@ -38,8 +40,3 @@ bucket_name = "local-bucket"
 ip = "127.0.0.1"
 port = 8787
 local_protocol = "http"
-
-
-
-
-

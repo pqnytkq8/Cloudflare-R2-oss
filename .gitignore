@@ -1,4 +1,5 @@
-node_modules/
+﻿node_modules/
 *.local
 .cf-assets/
-build*.log.kv-namespaces.json
+build*.log
+.kv-namespaces.json
