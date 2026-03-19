@@ -23,16 +23,13 @@
     <div class="app-bar">
       <input type="search" v-model="search" aria-label="Search" />
       <div class="menu-button">
-        <button 
+        <button
           v-if="!isLoggedIn"
-          class="circle login-button" 
+          class="login-button"
           @click="showLoginDialog = true"
           title="点击登录以访问更多资源"
-          style="background-color: #2196F3; color: white; margin-right: 4px;"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="display: block; margin: 4px">
-            <path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-          </svg>
+          登录
         </button>
         <div v-else style="display: flex; align-items: center; margin-right: 8px; gap: 4px;">
           <span style="font-size: 12px; color: #666;">{{ username }}</span>
@@ -721,10 +718,28 @@ export default {
   display: flex;
   position: relative;
   margin-left: 4px;
+  align-items: center;
 }
 
 .menu-button > button {
   transition: background-color 0.2s ease;
+}
+
+.login-button {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0 14px;
+  height: 34px;
+  margin-right: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 34px;
+}
+
+.login-button:hover {
+  background-color: #1976d2;
 }
 
 .menu-button > button:hover {
