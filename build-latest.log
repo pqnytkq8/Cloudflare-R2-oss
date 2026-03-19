@@ -1,0 +1,79 @@
+2026-03-19T02:33:09.961Z	Initializing build environment...
+2026-03-19T02:33:14.467Z	Success: Finished initializing build environment
+2026-03-19T02:33:15.148Z	Cloning repository...
+2026-03-19T02:33:16.622Z	No build output detected to cache. Skipping.
+2026-03-19T02:33:16.622Z	No dependencies detected to cache. Skipping.
+2026-03-19T02:33:16.626Z	Detected the following tools from environment: bun@1.2.15, nodejs@22.16.0
+2026-03-19T02:33:16.629Z	Installing project dependencies: bun install
+2026-03-19T02:33:16.883Z	bun install v1.2.15 (df017990)
+2026-03-19T02:33:16.923Z	Resolving dependencies
+2026-03-19T02:33:19.230Z	Resolved, downloaded and extracted [338]
+2026-03-19T02:33:20.765Z	Saved lockfile
+2026-03-19T02:33:20.765Z	
+2026-03-19T02:33:20.766Z	+ @cloudflare/workers-types@4.20260317.1
+2026-03-19T02:33:20.766Z	+ wrangler@3.114.17 (v4.75.0 available)
+2026-03-19T02:33:20.766Z	
+2026-03-19T02:33:20.766Z	62 packages installed [3.98s]
+2026-03-19T02:33:20.939Z	Executing user build command: npm run build
+2026-03-19T02:33:21.536Z	
+2026-03-19T02:33:21.536Z	> r2cloud@0.0.1 build
+2026-03-19T02:33:21.536Z	> echo 'Build completed'
+2026-03-19T02:33:21.537Z	
+2026-03-19T02:33:21.541Z	Build completed
+2026-03-19T02:33:21.556Z	Success: Build command completed
+2026-03-19T02:33:21.684Z	Executing user deploy command: npx wrangler deploy
+2026-03-19T02:33:23.851Z	
+2026-03-19T02:33:23.852Z	 ⛅️ wrangler 3.114.17 (update available 4.75.0)
+2026-03-19T02:33:23.852Z	-----------------------------------------------
+2026-03-19T02:33:23.852Z	
+2026-03-19T02:33:23.921Z	▲ [WARNING] The version of Wrangler you are using is now out-of-date.
+2026-03-19T02:33:23.921Z	
+2026-03-19T02:33:23.922Z	  Please update to the latest version to prevent critical errors.
+2026-03-19T02:33:23.922Z	  Run `npm install --save-dev wrangler@4` to update to the latest version.
+2026-03-19T02:33:23.922Z	  After installation, run Wrangler with `npx wrangler`.
+2026-03-19T02:33:23.922Z	
+2026-03-19T02:33:23.922Z	
+2026-03-19T02:33:23.929Z	[custom build] Running: node scripts/predeploy.mjs
+2026-03-19T02:33:23.971Z	[custom build] [predeploy] ensure R2 bucket: r2cloud
+2026-03-19T02:33:23.971Z	[custom build] 
+2026-03-19T02:33:25.091Z	[custom build] 
+2026-03-19T02:33:25.091Z	[custom build]  ⛅️ wrangler 3.114.17 (update available 4.75.0)
+2026-03-19T02:33:25.091Z	[custom build] -----------------------------------------------
+2026-03-19T02:33:25.092Z	[custom build] 
+2026-03-19T02:33:25.092Z	[custom build] 
+2026-03-19T02:33:25.193Z	[custom build] ▲ [WARNING] The version of Wrangler you are using is now out-of-date.
+2026-03-19T02:33:25.194Z	[custom build] 
+2026-03-19T02:33:25.194Z	[custom build]   Please update to the latest version to prevent critical errors.
+2026-03-19T02:33:25.194Z	[custom build]   Run `npm install --save-dev wrangler@4` to update to the latest version.
+2026-03-19T02:33:25.194Z	[custom build]   After installation, run Wrangler with `npx wrangler`.
+2026-03-19T02:33:25.195Z	[custom build] 
+2026-03-19T02:33:25.195Z	[custom build] 
+2026-03-19T02:33:25.195Z	[custom build] 
+2026-03-19T02:33:25.205Z	[custom build] Creating bucket 'r2cloud'...
+2026-03-19T02:33:25.205Z	[custom build] 
+2026-03-19T02:33:26.171Z	[custom build] 
+2026-03-19T02:33:26.172Z	[custom build] 
+2026-03-19T02:33:26.174Z	[custom build] ✘ [ERROR] A request to the Cloudflare API (/accounts/9dd24ca5e61820973477ef1dfb3d782c/r2/buckets) failed.
+2026-03-19T02:33:26.175Z	[custom build] 
+2026-03-19T02:33:26.175Z	[custom build]   The bucket you tried to create already exists, and you own it. [code: 10004]
+2026-03-19T02:33:26.175Z	[custom build]   
+2026-03-19T02:33:26.175Z	[custom build]   If you think this is a bug, please open an issue at: https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-03-19T02:33:26.175Z	[custom build] 
+2026-03-19T02:33:26.176Z	[custom build] 
+2026-03-19T02:33:26.176Z	[custom build] 
+2026-03-19T02:33:26.190Z	[custom build] 🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-19_02-33-24_906.log"
+2026-03-19T02:33:26.190Z	[custom build] 
+2026-03-19T02:33:26.337Z	[custom build] [predeploy] R2 bucket 'r2cloud' already exists, continue...
+2026-03-19T02:33:26.337Z	[custom build] 
+2026-03-19T02:33:27.583Z	🌀 Building list of assets...
+2026-03-19T02:33:27.842Z	
+2026-03-19T02:33:27.845Z	✘ [ERROR] Asset too large.
+2026-03-19T02:33:27.845Z	
+2026-03-19T02:33:27.845Z	  Cloudflare Workers supports assets with sizes of up to 25 MiB. We found a file /opt/buildhome/repo/node_modules/workerd/bin/workerd with a size of 97.4 MiB.
+2026-03-19T02:33:27.845Z	  Ensure all assets in your assets directory "/opt/buildhome/repo" conform with the Workers maximum size requirement.
+2026-03-19T02:33:27.845Z	
+2026-03-19T02:33:27.845Z	
+2026-03-19T02:33:27.846Z	
+2026-03-19T02:33:27.846Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2026-03-19T02:33:28.588Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-03-19_02-33-23_201.log"
+2026-03-19T02:33:28.693Z	Failed: error occurred while running deploy command

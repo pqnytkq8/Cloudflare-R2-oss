@@ -19,6 +19,11 @@ binding = "BUCKET"
 bucket_name = "r2cloud"
 preview_bucket_name = "r2cloud"
 
+# KV 命名空间绑定（缓存）
+# 注：id 和 preview_id 由 predeploy.mjs 自动创建和管理
+[[kv_namespaces]]
+binding = "CACHE"
+
 [vars]
 GUEST = "public/"
 "admin:666" = "*"
