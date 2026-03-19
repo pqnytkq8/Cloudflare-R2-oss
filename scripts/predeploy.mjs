@@ -1,4 +1,7 @@
 import { spawn } from "node:child_process";
+import { mkdir, rm, cp, access } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 function runWithOutput(cmd, args) {
   return new Promise((resolve, reject) => {
@@ -39,9 +42,48 @@ async function ensureBucket(bucketName) {
   }
 }
 
-const bucketName = "r2cloud";
-console.log(`[predeploy] ensure R2 bucket: ${bucketName}`);
-ensureBucket(bucketName).catch((err) => {
+async function exists(targetPath) {
+  try {
+    await access(targetPath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function prepareAssets() {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const root = path.resolve(__dirname, "..");
+  const outDir = path.join(root, ".cf-assets");
+
+  console.log(`[predeploy] prepare assets: ${outDir}`);
+  await rm(outDir, { recursive: true, force: true });
+  await mkdir(outDir, { recursive: true });
+
+  const singleFiles = ["index.html", "404.html", "robots.txt"];
+  for (const file of singleFiles) {
+    const src = path.join(root, file);
+    const dst = path.join(outDir, file);
+    if (await exists(src)) {
+      await cp(src, dst, { force: true });
+    }
+  }
+
+  const assetsDir = path.join(root, "assets");
+  if (await exists(assetsDir)) {
+    await cp(assetsDir, path.join(outDir, "assets"), { recursive: true, force: true });
+  }
+}
+
+async function main() {
+  const bucketName = "r2cloud";
+  console.log(`[predeploy] ensure R2 bucket: ${bucketName}`);
+  await ensureBucket(bucketName);
+  await prepareAssets();
+}
+
+main().catch((err) => {
   console.error(err);
   process.exit(1);
 });

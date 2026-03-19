@@ -10,7 +10,7 @@ compatibility_flags = ["nodejs_compat"]
 command = "node scripts/predeploy.mjs"
 
 [assets]
-directory = "."
+directory = ".cf-assets"
 binding = "ASSETS"
 
 # R2 存储桶绑定
