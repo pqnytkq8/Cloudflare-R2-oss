@@ -17,12 +17,8 @@ export async function onRequestGet(context) {
   if (!bucket) return notFound();
 
   // 权限检查
-  const hasPermission = await get_auth_status_for_read(context, path);
-  if (!hasPermission) {
-    return new Response("Unauthorized", { 
-      status: 401,
-      headers: { "WWW-Authenticate": 'Basic realm="Please login"' }
-    });
+  if (!await get_auth_status_for_read(context, path)) {
+    return new Response("Unauthorized", { status: 401 });
   }
 
   try {

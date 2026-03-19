@@ -23,6 +23,27 @@
     <div class="app-bar">
       <input type="search" v-model="search" aria-label="Search" />
       <div class="menu-button">
+        <button 
+          class="circle" 
+          @click="showLoginDialog = true"
+          title="登录"
+          style="margin-right: 4px;"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="display: block; margin: 4px">
+            <path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+          </svg>
+        </button>
+        <button 
+          v-if="isLoggedIn"
+          class="circle"
+          @click="logout"
+          title="退出登录"
+          style="margin-right: 4px;"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="display: block; margin: 4px">
+            <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+          </svg>
+        </button>
         <button class="circle" @click="showMenu = true">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +66,10 @@
         />
       </div>
     </div>
+    <LoginDialog
+      v-model="showLoginDialog"
+      @login="handleLogin"
+    />
     <ul class="file-list">
       <li v-if="cwd !== ''">
         <div
@@ -228,8 +253,11 @@ export default {
     showContextMenu: false,
     showMenu: false,
     showUploadPopup: false,
+    showLoginDialog: false,
     uploadProgress: null,
     uploadQueue: [],
+    isLoggedIn: false,
+    username: "",
   }),
 
   computed: {
@@ -253,6 +281,28 @@ export default {
   },
 
   methods: {
+    handleLogin({ username, password }) {
+      // 保存认证凭证到 localStorage
+      const credentials = btoa(`${username}:${password}`);
+      localStorage.setItem("auth", credentials);
+      
+      // 设置 axios 默认请求头
+      axios.defaults.headers.common["Authorization"] = `Basic ${credentials}`;
+      
+      this.isLoggedIn = true;
+      this.username = username;
+      
+      // 重新加载文件列表
+      this.fetchFiles();
+    },
+
+    logout() {
+      localStorage.removeItem("auth");
+      delete axios.defaults.headers.common["Authorization"];
+      this.isLoggedIn = false;
+      this.username = "";
+    },
+
     copyLink(link) {
       const url = new URL(link, window.location.origin);
       navigator.clipboard.writeText(url.toString());
@@ -623,6 +673,17 @@ export default {
   },
 
   created() {
+    // 检查 localStorage 中是否有保存的认证信息
+    const savedAuth = localStorage.getItem("auth");
+    if (savedAuth) {
+      axios.defaults.headers.common["Authorization"] = `Basic ${savedAuth}`;
+      this.isLoggedIn = true;
+      try {
+        const decoded = atob(savedAuth);
+        this.username = decoded.split(":")[0];
+      } catch (e) {}
+    }
+    
     window.addEventListener("popstate", (ev) => {
       const searchParams = new URL(window.location).searchParams;
       if (searchParams.get("p") !== this.cwd)
@@ -635,6 +696,7 @@ export default {
     Menu,
     MimeIcon,
     UploadPopup,
+    LoginDialog: () => import("./LoginDialog.vue"),
   },
 };
 </script>
